@@ -1,8 +1,5 @@
 name: Build TgClient APK
 
-# Dijalankan manual dari tab Actions. Saat "Run workflow" kamu akan
-# diminta mengisi 1 kolom: link download tdlib-android-output.zip
-# dari repo build TDLib sebelumnya.
 on:
   workflow_dispatch:
     inputs:
@@ -12,7 +9,7 @@ on:
         type: string
 
 permissions:
-  contents: write # perlu untuk membuat Release berisi APK
+  contents: write
 
 jobs:
   build:
@@ -36,6 +33,9 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.7'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
       - name: Install komponen Android SDK yang dibutuhkan
         run: |
